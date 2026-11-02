@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: dahiya-auto-forwarder
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    healthCheckPath: /health
+    disk:
+      name: dahiya-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DB_PATH
+        value: /var/data/bot.sqlite3
+      - key: PORT
+        value: 10000
+      - key: BOT_TOKEN
+        sync: false
+      - key: API_ID
+        sync: false
+      - key: API_HASH
+        sync: false
+      - key: TELETHON_SESSION
+        sync: false
+      - key: OWNER_IDS
+        sync: false
